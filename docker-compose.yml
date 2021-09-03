@@ -1,0 +1,17 @@
+version: '3.6'
+services:
+  license_finder:
+  build:
+    dockerfile: dockerfiles/Dockerfile.audit
+    context: .
+  volumes:
+    - ./:/scan
+
+  test-management:
+    build:
+      dockerfile: dockerfiles/Dockerfile.tms
+      context: .
+    environment:
+      BITBAR_ACCOUNT_MAX:
+    ports:
+      - "9340:9340"

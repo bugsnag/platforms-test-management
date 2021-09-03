@@ -1,0 +1,18 @@
+steps:
+
+  - name: ':copyright: License Audit'
+    plugins:
+      docker-compose#v3.7.0:
+        run: license_finder
+    command: /bin/bash -lc '/scan/scripts/license_finder.sh'
+
+  - label: ':docker: Build test-management-service image'
+    plugins:
+      - docker-compose#v3.7.0:
+          build: test-management
+          image-repository: 855461928731.dkr.ecr.us-west-1.amazonaws.com/maze-runner
+          cache-from:
+            - test-management:855461928731.dkr.ecr.us-west-1.amazonaws.com/maze-runner:${BRANCH_NAME}-test-management
+      - docker-compose#v3.7.0:
+          push:
+            - test-management:855461928731.dkr.ecr.us-west-1.amazonaws.com/maze-runner:${BRANCH_NAME}-test-management

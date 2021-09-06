@@ -5,12 +5,16 @@ require 'cgi'
 require 'json'
 
 module TestManagementService
+  # Servlet controlling access to bitbar_account_manager methods
   class AccountServlet < WEBrick::HTTPServlet::AbstractServlet
     def initialize(server, account_manager)
       super server
       @account_manager = account_manager
     end
 
+    # Denotes two routes:
+    #   /request - Attempt to claim an open account
+    #   /release - Release a currently used account
     def do_GET (request, response)
       case request.path_info
       when "/request"

@@ -17,7 +17,7 @@ module TestManagementService
     #   /release - Release a currently used account
     def do_GET (request, response)
       case request.path_info
-      when "/request"
+      when '/request'
         account = @account_manager.claim_account
         if account.nil?
           response.status = 409
@@ -27,11 +27,21 @@ module TestManagementService
           response.header['content-type'] = 'application/json'
           response.body = JSON.dump(account)
         end
-      when "/release"
+      when '/release'
         query_string = CGI.parse(request.query_string)
-        pp query_string
-        @account_manager.release_account(query_string['account_id'].first.to_i)
-        response.status = 202
+        if query_string.keys.include?('account_id')
+          account_id = query_string['account_id'].first.to_i
+          # account_id is 0 only if the string could not be converted into a number
+          # There is no account 0 so we can discard that
+          if account_id.zero?
+            response.status = 400
+          else
+            @account_manager.release_account(account_id)
+            response.status = 202
+          end
+        else
+          response.status = 400
+        end
       else
         response.status = 404
         response.body = "Path #{request.path} not found"

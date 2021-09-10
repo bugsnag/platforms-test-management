@@ -4,4 +4,4 @@ WORKDIR /app/
 
 COPY lib/ lib/
 
-ENTRYPOINT ["ruby", "lib/test_management_service.rb"]]
+ENTRYPOINT ["ruby", "lib/test_management_service.rb"]

@@ -9,9 +9,9 @@ module TestManagementService
 
     DEFAULT_FILE_LOCATION = 'cached_accounts'
 
-    # @param max_accounts [Integer] Maximum number of BitBar accounts useable
+    # @param max_accounts [Integer] Maximum number of BitBar accounts usable
     # @param timeout [Integer] The maximum amount of seconds an account may be used
-    def initialize(max_accounts, timeout = 3600)
+    def initialize(max_accounts, timeout = 5400)
       @lock = Mutex.new
       previous_accounts = read_cached_state || []
       @accounts = (1..max_accounts).map do |index|

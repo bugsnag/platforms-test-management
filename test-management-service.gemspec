@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.name    = 'test-management-server'
   spec.version = TestManagementService::VERSION
   spec.authors = ['Alex Moinet']
-  spec.email   = ['alex@bugsnag.com']
+  spec.email   = ['alex.moinet@smartbear.com']
   spec.required_ruby_version = '>= 2.5.0'
   spec.description = 'A server providing shared functionality to maze-runner ' \
                      'and other platforms testing tools.'

@@ -13,5 +13,7 @@ services:
       context: .
     environment:
       BITBAR_ACCOUNT_MAX:
+      MONGODB_HOST:
+      MONGODB_DB:
     ports:
       - "9340:9340"

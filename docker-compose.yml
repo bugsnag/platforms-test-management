@@ -7,13 +7,41 @@ services:
     volumes:
       - ./:/scan
 
+  mongodb:
+    image: mongo:latest
+    volumes:
+      - "dbdata_mongodb:/data/db"
+    ports:
+      - "27017:27017"
+
   test-management:
     build:
       dockerfile: dockerfiles/Dockerfile.tms
       context: .
+    depends_on:
+      - mongodb
     environment:
       BITBAR_ACCOUNT_MAX:
-      MONGODB_HOST:
-      MONGODB_DB:
+      MONGODB_HOST: mongo
+      MONGODB_DB: bitbar
+    links:
+      - "mongodb:mongo"
     ports:
       - "9340:9340"
+
+  metabase:
+    image: metabase/metabase
+    depends_on:
+      - mongodb
+    environment:
+      MB_DB_FILE: /metabase-data/metabase.db
+    links:
+      - "mongodb:mongo"
+    volumes:
+      - "dbdata_metabase:/metabase-data"
+    ports:
+      - "3000:3000"
+
+volumes:
+  dbdata_mongodb:
+  dbdata_metabase:

@@ -4,7 +4,7 @@ WORKDIR /app/
 
 COPY lib/ lib/
 COPY scripts/ scripts/
-COPY Gemfile test-management-service.gemspec .
+COPY Gemfile test-management-service.gemspec ./
 
 RUN bundle install
 

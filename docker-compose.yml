@@ -4,6 +4,9 @@ services:
     image: mongo:latest
     volumes:
       - "dbdata_mongodb:/data/db"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME:
+      MONGO_INITDB_ROOT_PASSWORD:
     restart: always
 
   test-management:
@@ -15,7 +18,9 @@ services:
     environment:
       BITBAR_ACCOUNT_MAX:
       MONGODB_HOST: mongo
-      MONGODB_DB: bitbar
+      MONGODB_DB: test-reports
+      MONGODB_USER:
+      MONGODB_PASS:
     links:
       - "mongodb:mongo"
     ports:

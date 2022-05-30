@@ -10,10 +10,14 @@ module TestManagementService
       def initialize
         host = ENV['MONGODB_HOST']
         database = ENV['MONGODB_DB']
+        user = ENV['MONGODB_USER']
+        password = ENV['MONGODB_PASS']
         Mongoid.configure do |config|
           config.clients.default = {
             hosts: [host],
-            database: database
+            database: database,
+            user: user,
+            password: password
           }
           config.log_level = :warn
         end

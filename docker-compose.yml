@@ -5,8 +5,8 @@ services:
     volumes:
       - "dbdata_mongodb:/data/db"
     environment:
-      MONGO_INITDB_ROOT_USERNAME:
-      MONGO_INITDB_ROOT_PASSWORD:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASS}
     restart: always
 
   test-management:
@@ -21,6 +21,7 @@ services:
       MONGODB_DB: test-reports
       MONGODB_USER:
       MONGODB_PASS:
+      TMS_AUTH_TOKEN:
     links:
       - "mongodb:mongo"
     ports:
@@ -38,7 +39,7 @@ services:
     volumes:
       - "dbdata_metabase:/metabase-data"
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3000:3000"
     restart: always
 
 volumes:

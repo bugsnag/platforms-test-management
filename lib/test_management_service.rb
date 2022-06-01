@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-require_relative 'test_management_service/logger'
+require 'logger'
+
 require_relative 'test_management_service/token_authenticator'
 require_relative 'test_management_service/version'
 
@@ -8,6 +9,8 @@ require_relative 'test_management_service/account_manager/servlet'
 
 require_relative 'test_management_service/test_reporter/report_handler'
 require_relative 'test_management_service/test_reporter/servlet'
+
+$logger = Logger.new(STDOUT, level: :info, datetime_format: '%Y-%m-%d %H:%M:%S')
 
 ACCOUNT_MAXIMUM = ENV['BITBAR_ACCOUNT_MAX'].to_i
 

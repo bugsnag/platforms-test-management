@@ -16,8 +16,11 @@ module TestManagementService
           config.clients.default = {
             hosts: [host],
             database: database,
-            user: user,
-            password: password
+            options: {
+              user: user,
+              password: password,
+              auth_source: 'admin'
+            }
           }
           config.log_level = :warn
         end

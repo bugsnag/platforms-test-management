@@ -10,7 +10,7 @@ module TestManagementService
     def initialize(server, report_handler, authenticator)
       super server
       @report_handler = report_handler
-      @authenticator
+      @authenticator = authenticator
     end
 
     def do_POST (request, response)
@@ -27,7 +27,6 @@ module TestManagementService
       rescue StandardError => e
         $logger.error("An error occurred: #{e.message}")
         response.status = 503
-        response.body = e.message
       end
     end
   end

@@ -7,8 +7,6 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USER}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASS}
-    env_file:
-      - tms-runtime-env
     restart: always
 
   test-management:
@@ -24,8 +22,6 @@ services:
       MONGODB_USER:
       MONGODB_PASS:
       TMS_AUTH_TOKEN:
-    env_file:
-      - tms-runtime-env
     links:
       - "mongodb:mongo"
     ports:

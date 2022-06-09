@@ -14,7 +14,7 @@ $logger = Logger.new(STDOUT, level: :info, datetime_format: '%Y-%m-%d %H:%M:%S')
 
 ACCOUNT_MAXIMUM = ENV['BITBAR_ACCOUNT_MAX'].to_i
 
-server = WEBrick::HTTPServer.new(:Port => 9340)
+server = WEBrick::HTTPServer.new(:Port => 9340, :Logger => $logger)
 authenticator = TestManagementService::TokenAuthenticator.new
 
 server.mount "/account",

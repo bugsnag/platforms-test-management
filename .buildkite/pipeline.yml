@@ -4,6 +4,7 @@ steps:
     plugins:
       docker-compose#v3.7.0:
         run: license_finder
+        config: docker-compose.tests.yml
     command: /bin/bash -lc '/scan/scripts/license_finder.sh'
 
   - label: ':docker: Build test-management-service image'

@@ -15,5 +15,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
   spec.files = Dir.glob('{lib}/**/*').select { |fn| File.file?(fn) }
 
+  spec.add_dependency 'mongoid', '~> 7.3.0'
+
   spec.executables = spec.files.grep(%r{^bin/[\w\-]+$}) { |f| File.basename(f) }
 end

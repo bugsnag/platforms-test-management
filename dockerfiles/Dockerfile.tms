@@ -3,5 +3,9 @@ FROM ruby:2.7.4
 WORKDIR /app/
 
 COPY lib/ lib/
+COPY scripts/ scripts/
+COPY Gemfile test-management-service.gemspec ./
+
+RUN bundle install
 
 ENTRYPOINT ["ruby", "lib/test_management_service.rb"]

@@ -16,11 +16,13 @@ module TestManagementService
     def do_POST (request, response)
       return unless @authenticator.authenticate(request, response)
       begin
+        pp "LOG LOG LOG"
         $logger.info('Received log from maze runner')
         report = JSON.parse(request.body)
         @report_handler.insert_log(report)
         response.status = 202
       rescue JSON::ParserError => e
+        pp "PARSE FAILED"
         $logger.error("JSON.parse failed with error: #{e.message}")
         response.status = 400
         response.body = e.message

@@ -7,8 +7,12 @@ require_relative 'test_management_service/version'
 require_relative 'test_management_service/account_manager/bitbar_account_manager'
 require_relative 'test_management_service/account_manager/servlet'
 
+require_relative 'test_management_service/log_recorder/log_handler'
+require_relative 'test_management_service/log_recorder/servlet'
+
 require_relative 'test_management_service/test_reporter/report_handler'
 require_relative 'test_management_service/test_reporter/servlet'
+
 
 $logger = Logger.new(STDOUT, level: :info, datetime_format: '%Y-%m-%d %H:%M:%S')
 
@@ -20,6 +24,11 @@ authenticator = TestManagementService::TokenAuthenticator.new
 server.mount "/account",
              TestManagementService::AccountServlet,
              TestManagementService::BitbarAccountManager.new(ACCOUNT_MAXIMUM),
+             authenticator
+
+server.mount "/maze-log",
+             TestManagementService::LogServlet,
+             TestManagementService::LogRecorder::LogRecorder.new,
              authenticator
 
 server.mount "/report",
